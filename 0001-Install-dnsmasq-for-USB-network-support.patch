@@ -1,0 +1,29 @@
+From aee3c4c0f3478c65959381fea40fc82926acff9e Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?S=C5=82awomir=20Gajowniczek?=
+ <slawomir.gajowniczek@nekken.pl>
+Date: Wed, 20 May 2026 16:42:05 +0200
+Subject: [PATCH] Install dnsmasq for USB network support
+
+---
+ project/cfg/BoardConfig_IPC/rv1106-jetkvm-post.sh | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/project/cfg/BoardConfig_IPC/rv1106-jetkvm-post.sh b/project/cfg/BoardConfig_IPC/rv1106-jetkvm-post.sh
+index f362d3a51..5e13d10c5 100755
+--- a/project/cfg/BoardConfig_IPC/rv1106-jetkvm-post.sh
++++ b/project/cfg/BoardConfig_IPC/rv1106-jetkvm-post.sh
+@@ -70,4 +70,9 @@ rm -v $RK_PROJECT_PACKAGE_ROOTFS_DIR/oem/usr/bin/j2s4b_dev
+ rm -rfv $RK_PROJECT_PACKAGE_ROOTFS_DIR/etc/iqfiles/*
+ 
+ echo "+ Removing demo files"
+-rm -rfv $RK_PROJECT_PACKAGE_ROOTFS_DIR/oem/usr/bin/rkisp_demo
+\ No newline at end of file
++rm -rfv $RK_PROJECT_PACKAGE_ROOTFS_DIR/oem/usr/bin/rkisp_demo
++
++echo "+ Installing USB network helpers"
++install -D -m 0755 \
++	$SDK_ROOT_DIR/project/app/wifi_app/precompile/$RK_TOOLCHAIN_CROSS/bin/dnsmasq \
++	$RK_PROJECT_PACKAGE_ROOTFS_DIR/usr/bin/dnsmasq
+-- 
+2.50.1 (Apple Git-155)
+
