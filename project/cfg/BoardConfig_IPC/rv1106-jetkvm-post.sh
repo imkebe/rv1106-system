@@ -71,3 +71,8 @@ rm -rfv $RK_PROJECT_PACKAGE_ROOTFS_DIR/etc/iqfiles/*
 
 echo "+ Removing demo files"
 rm -rfv $RK_PROJECT_PACKAGE_ROOTFS_DIR/oem/usr/bin/rkisp_demo
+
+echo "+ Installing USB network helpers"
+install -D -m 0755 \
+	$SDK_ROOT_DIR/project/app/wifi_app/precompile/$RK_TOOLCHAIN_CROSS/bin/dnsmasq \
+	$RK_PROJECT_PACKAGE_ROOTFS_DIR/usr/bin/dnsmasq
