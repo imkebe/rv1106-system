@@ -76,3 +76,13 @@ echo "+ Installing USB network helpers"
 install -D -m 0755 \
 	$SDK_ROOT_DIR/project/app/wifi_app/precompile/$RK_TOOLCHAIN_CROSS/bin/dnsmasq \
 	$RK_PROJECT_PACKAGE_ROOTFS_DIR/usr/bin/dnsmasq
+# The vendor dnsmasq links gettext, which in turn links libiconv. These
+# libraries are removed from the minimal rootfs unless installed explicitly.
+install -D -m 0755 \
+	$SDK_ROOT_DIR/project/app/wifi_app/precompile/$RK_TOOLCHAIN_CROSS/lib/libintl.so.8.1.6 \
+	$RK_PROJECT_PACKAGE_ROOTFS_DIR/usr/lib/libintl.so.8.1.6
+ln -sf libintl.so.8.1.6 $RK_PROJECT_PACKAGE_ROOTFS_DIR/usr/lib/libintl.so.8
+install -D -m 0755 \
+	$SDK_ROOT_DIR/project/app/component/third_libs/lib/$RK_TOOLCHAIN_CROSS/libiconv.so.2.6.1 \
+	$RK_PROJECT_PACKAGE_ROOTFS_DIR/usr/lib/libiconv.so.2.6.1
+ln -sf libiconv.so.2.6.1 $RK_PROJECT_PACKAGE_ROOTFS_DIR/usr/lib/libiconv.so.2
