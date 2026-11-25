@@ -1,3 +1,25 @@
+> [!NOTE]
+> This is the `advanced-1` branch: the system image for the unofficial
+> [JetKVM advanced-1 firmware](https://github.com/imkebe/kvm). It is not made or supported by
+> JetKVM. For the standard JetKVM (`jetkvm-v2`, eMMC) only; the JetKVM Mini is not supported yet.
+
+## What advanced-1 changes
+
+- **dnsmasq** and the libraries it needs are in the image, so the KVM can give the connected
+  computer an address over USB Ethernet.
+- **Eight HID gadget devices instead of four**, and the marker file `/etc/jetkvm-usb-spare-in`.
+  Together they let the app use spare USB endpoints, which camera, microphone and USB Ethernet
+  need when they are on at the same time.
+
+Build, on a case-sensitive Linux filesystem:
+
+```bash
+./build.sh lunch BoardConfig_IPC/BoardConfig-EMMC-NONE-RV1106_JETKVM_V2.mk
+./scripts/build_system.sh --sku emmc
+```
+
+Writing a system image replaces the boot loader. Keep the KVM powered while it is written. What
+happens after a failed write was not tested.
 
 <div align="center">
   <img alt="JetKVM Logo" src="https://jetkvm.com/logo-blue.png" height="40">
