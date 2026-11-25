@@ -86,3 +86,9 @@ install -D -m 0755 \
 	$SDK_ROOT_DIR/project/app/component/third_libs/lib/$RK_TOOLCHAIN_CROSS/libiconv.so.2.6.1 \
 	$RK_PROJECT_PACKAGE_ROOTFS_DIR/usr/lib/libiconv.so.2.6.1
 ln -sf libiconv.so.2.6.1 $RK_PROJECT_PACKAGE_ROOTFS_DIR/usr/lib/libiconv.so.2
+
+echo "+ Marking kernel support for spare USB IN endpoints (HIDG_MINORS=8)"
+# The kernel raises the f_hid instance limit from 4 to 8, so the app may add
+# unused HID functions that take IN endpoints 6 and 8 (RV1106 defect, #1634).
+# The app creates them only when this file exists.
+install -D -m 0644 /dev/null $RK_PROJECT_PACKAGE_ROOTFS_DIR/etc/jetkvm-usb-spare-in

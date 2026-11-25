@@ -20,7 +20,7 @@
 #include "u_f.h"
 #include "u_hid.h"
 
-#define HIDG_MINORS	4
+#define HIDG_MINORS	8
 
 static int major, minors;
 static struct class *hidg_class;
